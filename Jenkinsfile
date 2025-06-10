@@ -73,21 +73,21 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                script {
-                    def buildUrl = "${env.BUILD_URL}"
-                    def siteUrl = "https://${NETLIFY_SITE_ID}.netlify.app"
-                    sh 'echo "Build URL: ${buildUrl}"'
-                    sh 'echo "Site URL: ${siteUrl}"'
-                }
+    }
+    post {
+        always {
+            script {
+                def buildUrl = "${env.BUILD_URL}"
+                def siteUrl = "https://${NETLIFY_SITE_ID}.netlify.app"
+                sh 'echo "Build URL: ${buildUrl}"'
+                sh 'echo "Site URL: ${siteUrl}"'
             }
-            success {
-                sh 'echo "\033[0;32mPipeline completed successfully!\033[0m"'
-            }
-            failure {
-                sh 'echo "\033[0;31mPipeline failed!\033[0m"'
-            }
+        }
+        success {
+            sh 'echo "\033[0;32mPipeline completed successfully!\033[0m"'
+        }
+        failure {
+            sh 'echo "\033[0;31mPipeline failed!\033[0m"'
         }
     }
 }
