@@ -61,7 +61,6 @@ pipeline {
                     node_modules/.bin/netlify --version
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
                     node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir build
-                    sh 'echo "\033[0;32mDeployment completed successfully!\033[0m"'
                 '''
             }
             post {
