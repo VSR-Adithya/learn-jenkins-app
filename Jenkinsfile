@@ -61,15 +61,15 @@ pipeline {
                     node_modules/.bin/netlify --version
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
                     node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir build
-                    sh 'echo "\e[0;32mDeployment completed successfully!\e[0m"'
+                    sh 'echo "\033[0;32mDeployment completed successfully!\033[0m"'
                 '''
             }
             post {
                 failure {
-                    sh 'echo "\e[0;31mDeployment failed!\e[0m"'
+                    sh 'echo "\033[0;31mDeployment failed!\033[0m"'
                 }
                 success {
-                    sh 'echo "\e[0;32mDeployment succeeded!\e[0m"'
+                    sh 'echo "\033[0;32mDeployment succeeded!\033[0m"'
                 }
             }
         }
@@ -83,10 +83,10 @@ pipeline {
                 }
             }
             success {
-                sh 'echo "\e[0;32mPipeline completed successfully!\e[0m"'
+                sh 'echo "\033[0;32mPipeline completed successfully!\033[0m"'
             }
             failure {
-                sh 'echo "\e[0;31mPipeline failed!\e[0m"'
+                sh 'echo "\033[0;31mPipeline failed!\033[0m"'
             }
         }
     }
