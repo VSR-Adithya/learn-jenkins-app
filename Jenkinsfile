@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         NETLIFY_SITE_ID = '0ca1baaf-19d7-4ee6-8559-bf53794c4341'
+        NETLIFY_AUTH_TOKEN = credentials('netlify-personal-access-token')
     }
 
     stages {
@@ -59,7 +60,33 @@ pipeline {
                     npm install netlify-cli@20.1.1
                     node_modules/.bin/netlify --version
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
+                    node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir build
+                    echo "\e[0;32mDeployment completed successfully!\e[0m"
                 '''
+            }
+            post {
+                failure {
+                    echo "\e[0;31mDeployment failed!\e[0m"
+                }
+                success {
+                    echo "\e[0;32mDeployment succeeded!\e[0m"
+                }
+            }
+        }
+        post {
+            always {
+                script {
+                    def buildUrl = "${env.BUILD_URL}"
+                    def siteUrl = "https://${NETLIFY_SITE_ID}.netlify.app"
+                    echo "Build URL: ${buildUrl}"
+                    echo "Site URL: ${siteUrl}"
+                }
+            }
+            success {
+                echo "\e[0;32mPipeline completed successfully!\e[0m"
+            }
+            failure {
+                echo "\e[0;31mPipeline failed!\e[0m"
             }
         }
     }
