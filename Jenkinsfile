@@ -69,7 +69,7 @@ pipeline {
                 3. The auth Token and Site ID are provide from environment variables mentioned at the top.
                 4. The Netlify CLI is used to deploy the build directory to the specified site.
                 5. The --prod flag indicates that this is a production deployment.
-                
+                6. The --dir flag specifies the directory to deploy, which is 'build' in this case.
                 */
             }
             post {
