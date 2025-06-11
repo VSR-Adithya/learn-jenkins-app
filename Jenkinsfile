@@ -67,6 +67,7 @@ pipeline {
                 1. Cannot install globally with -g flag as a non root user.
                 2. You get Netlify site ID after deploying a sample project.
                 3. The auth Token and Site ID are provide from environment variables mentioned at the top.
+                4. The Netlify CLI is used to deploy the build directory to the specified site.
                 */
             }
             post {
