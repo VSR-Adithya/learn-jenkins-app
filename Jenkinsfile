@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NETLIFY_SITE_ID = '0ca1baaf-19d7-4ee6-8559-bf53794c4341'
-        NETLIFY_AUTH_TOKEN = credentials('netlify-personal-access-token') // Credentials should be added in Jenkins.
+        NETLIFY_AUTH_TOKEN = credentials('netlify-personal-access-token') // Credentials should be added in Jenkins Inorder to work.
     }
 
     stages {
