@@ -1,9 +1,9 @@
-pipeline {
+# pipeline {
     agent any
 
     environment {
         NETLIFY_SITE_ID = '0ca1baaf-19d7-4ee6-8559-bf53794c4341'
-        NETLIFY_AUTH_TOKEN = credentials('netlify-personal-access-token')
+        NETLIFY_AUTH_TOKEN = credentials('netlify-personal-access-token') // Credentials should be added in Jenkins.
     }
 
     stages {
@@ -43,7 +43,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'test-results/junit.xml'
+                    junit 'test-results/junit.xml' // Adds a Test results trend to Jenkins
                 }
             }
         }
@@ -58,10 +58,16 @@ pipeline {
             steps {
                 sh '''
                     npm install netlify-cli@20.1.1
-                    node_modules/.bin/netlify --version
+                    node_modules/.bin/netlify --version 
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
-                    node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir build
+                    node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID \
+                     --auth $NETLIFY_AUTH_TOKEN --prod --dir build
                 '''
+                /*
+                1. Cannot install globally with -g flag as a non root user.
+                2. You get Netlify site ID after deploying a sample project.
+                3. The auth Token and Site ID are provide from environment variables mentioned at the top.
+                */
             }
             post {
                 failure {
@@ -90,4 +96,3 @@ pipeline {
         }
     }
 }
-
