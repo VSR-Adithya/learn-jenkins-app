@@ -43,8 +43,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'test-results/junit.xml' 
-                    // Adds a Test results trend to Jenkins
+                    junit 'test-results/junit.xml' // Adds a Test results trend to Jenkins
                 }
             }
         }
